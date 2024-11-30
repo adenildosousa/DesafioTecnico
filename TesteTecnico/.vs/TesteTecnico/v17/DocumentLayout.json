@@ -1,0 +1,57 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\TesteTecnico\\Desafio Tecnico Outsera\\TesteTecnico\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D406340C-4217-4875-89D7-78111C7A90F0}|..\\TestesIntegracao\\TestesIntegracao.csproj|d:\\testetecnico\\desafio tecnico outsera\\testesintegracao\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{91C6D69E-08F4-4A31-8D36-0644EC50E2AF}|TesteTecnico.csproj|d:\\testetecnico\\desafio tecnico outsera\\testetecnico\\controllers\\moviescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{91C6D69E-08F4-4A31-8D36-0644EC50E2AF}|TesteTecnico.csproj|solutionrelative:controllers\\moviescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MoviesController.cs",
+              "DocumentMoniker": "D:\\TesteTecnico\\Desafio Tecnico Outsera\\TesteTecnico\\Controllers\\MoviesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MoviesController.cs",
+              "ToolTip": "D:\\TesteTecnico\\Desafio Tecnico Outsera\\TesteTecnico\\Controllers\\MoviesController.cs",
+              "RelativeToolTip": "Controllers\\MoviesController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-30T12:54:52.963Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UnitTest1.cs",
+              "DocumentMoniker": "D:\\TesteTecnico\\Desafio Tecnico Outsera\\TestesIntegracao\\UnitTest1.cs",
+              "RelativeDocumentMoniker": "..\\TestesIntegracao\\UnitTest1.cs",
+              "ToolTip": "D:\\TesteTecnico\\Desafio Tecnico Outsera\\TestesIntegracao\\UnitTest1.cs",
+              "RelativeToolTip": "..\\TestesIntegracao\\UnitTest1.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-30T12:49:35.842Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
