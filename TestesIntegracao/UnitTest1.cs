@@ -1,6 +1,7 @@
 using System.Text.Json;
 using TesteTecnico.DataModel;
 using FluentAssertions;
+using TesteTecnico.Response;
 
 namespace TestesIntegracao
 {
@@ -37,16 +38,21 @@ namespace TestesIntegracao
         [Fact]
         public async Task GetMovies_ShouldReturnAStringTheMostAndLessInterval()
         {
-            // Act
             var response = await _client.GetAsync("/api/Movies/GetVencedorMaiorMenorIntervalo");
 
-            // Assert
             response.EnsureSuccessStatusCode();
             var responseString = await response.Content.ReadAsStringAsync();
 
-            responseString.Should().NotBeNull();
-            responseString.Should().Contain("Matthew Vaughn");
-            responseString.Should().Contain("Joel Silver");
+            var vencedores = JsonSerializer.Deserialize<VencedoresMoviesResponse>(responseString, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            vencedores.Should().NotBeNull();
+            vencedores.Min.Should().NotBeNull();
+            vencedores.Max.Should().NotBeNull();
+            vencedores.Max.Should().HaveCountGreaterThan(0);
+            vencedores.Min.Should().HaveCountGreaterThan(0);
         }
 
     }

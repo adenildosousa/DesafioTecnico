@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using TesteTecnico.Data;
 using TesteTecnico.DataModel;
+using TesteTecnico.Managers;
 using TesteTecnico.Repositories;
 
 namespace TesteTecnico.Controllers
@@ -20,11 +21,21 @@ namespace TesteTecnico.Controllers
         [HttpGet("GetVencedorMaiorMenorIntervalo")]
         public async Task<IActionResult> GetVencedorMaiorMenorIntervalo()
         {
-            MovieRepository repo = new MovieRepository(_context);
+            try
+            {
+                MoviesManager manager = new MoviesManager(_context);
 
-            string resultado = await repo.GetMaiorMenorIntervalo();
+                var resultado = await manager.GetVencedoresMovies();
 
-            return Ok(resultado);
+                if(resultado == null)
+                    return NotFound();
+
+                return Ok(resultado);
+            }
+            catch
+            {
+                return BadRequest("Erro interno no servidor!");
+            }
         }
 
         [HttpGet]

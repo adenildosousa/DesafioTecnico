@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using TesteTecnico.Data;
+﻿using TesteTecnico.Data;
 using TesteTecnico.DataModel;
+using TesteTecnico.Models;
 
 namespace TesteTecnico.Repositories
 {
@@ -14,43 +13,38 @@ namespace TesteTecnico.Repositories
             _context = context;
         }
 
-        public async Task<string> GetMaiorMenorIntervalo()
+        public async Task<List<Intervalo>> GetMaiorMenorIntervalo()
         {
-            var winners = _context.Movies
+            var venc = _context.Movies
                 .Where(m => m.Winner)
                 .AsEnumerable()
                 .SelectMany(m => m.Producer.Replace(", and ", ",")
                                            .Replace(" and ", ",")
                                            .Split(separator: ',')
-                .Select(p => new { m.Year, Producer = p.Trim() })) 
-                .OrderBy(m => m.Producer)
-                .ThenBy(m => m.Year)
-                .ToList();
-
-            var producerIntervals = winners
-                .GroupBy(w => w.Producer)
-                .Select(ganhadores =>
+                .Select(p => new { m.Year, Producer = p.Trim() }))
+                .GroupBy(m => m.Producer)
+                .Where(m => m.Count() > 1)
+                .SelectMany(m =>
                 {
-                    var intervalos = ganhadores.Zip(ganhadores.Skip(1), (prev, next) => new
-                    {
-                        Producer = ganhadores.Key,
-                        Interval = next.Year - prev.Year
-                    }).ToList();
+                    var vencedores = m.OrderBy(p => p.Year).ToList();
+                    var intervalos = new List<Intervalo>();
 
-                    return new
+                    for (int i = 0; i < vencedores.Count - 1; i++)
                     {
-                        Producer = ganhadores.Key,
-                        MaxInterval = intervalos.Any() ? intervalos.Max(i => i.Interval) : 0,
-                        MinInterval = intervalos.Any() ? intervalos.Min(i => i.Interval) : 0
-                    };
+                        Intervalo inter = new Intervalo()
+                        {
+                            Producer = m.Key,
+                            Interval = vencedores[i + 1].Year - vencedores[i].Year,
+                            PreviousWin = vencedores[i].Year,
+                            FollowingWin = vencedores[i + 1].Year
+                        };
+                        intervalos.Add(inter);
+                    }
+                    return intervalos;
                 })
-                .Where(p => p.MaxInterval > 0)
                 .ToList();
 
-            var maiorIntervalo = producerIntervals.OrderByDescending(p => p.MaxInterval).FirstOrDefault();
-            var menorIntervalo = producerIntervals.OrderBy(p => p.MinInterval).FirstOrDefault();
-            return $"Produtor com maior intervalo: {maiorIntervalo.Producer} com intervalo de {maiorIntervalo.MaxInterval} anos" +
-                $"\nProdutor com maior intervalo: {menorIntervalo.Producer} com intervalo de {menorIntervalo.MaxInterval} anos";
+            return venc;           
         }
 
         public async Task AddAsync(Movie movie)
